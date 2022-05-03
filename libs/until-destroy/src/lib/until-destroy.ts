@@ -29,7 +29,7 @@ function decorateNgOnDestroy(
 ) {
   return function (this: any) {
     // Invoke the original `ngOnDestroy` if it exists
-    if (!options.ngOnDestroyFirst) {
+    if (!options.ngOnDestroyLater) {
       ngOnDestroy && ngOnDestroy.call(this);
     }
 
@@ -53,7 +53,7 @@ function decorateNgOnDestroy(
       }
     }
     
-    if (options.ngOnDestroyFirst) {
+    if (options.ngOnDestroyLater) {
       ngOnDestroy && ngOnDestroy.call(this);
     }
   };
