@@ -41,6 +41,7 @@ export interface UntilDestroyOptions {
   blackList?: string[];
   arrayName?: string;
   checkProperties?: boolean;
+  ngOnDestroyLater?: boolean;
 }
 
 export function createSubjectOnTheInstance(instance: any, symbol: symbol): void {
