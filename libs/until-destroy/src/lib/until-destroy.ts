@@ -29,7 +29,9 @@ function decorateNgOnDestroy(
 ) {
   return function (this: any) {
     // Invoke the original `ngOnDestroy` if it exists
-    ngOnDestroy && ngOnDestroy.call(this);
+    if (!options.ngOnDestroyFirst) {
+      ngOnDestroy && ngOnDestroy.call(this);
+    }
 
     // It's important to use `this` instead of caching instance
     // that may lead to memory leaks
@@ -49,6 +51,10 @@ function decorateNgOnDestroy(
 
         unsubscribe(this[property]);
       }
+    }
+    
+    if (options.ngOnDestroyFirst) {
+      ngOnDestroy && ngOnDestroy.call(this);
     }
   };
 }
